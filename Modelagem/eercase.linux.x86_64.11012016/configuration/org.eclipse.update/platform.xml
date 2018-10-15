@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config date="1452564039767" transient="false">
+	<site updateable="true" url="platform:/base/" enabled="true" policy="USER-EXCLUDE">
+		<feature id="br.ufpe.cin.eercase.platform.feature" version="1.0.3" url="features/br.ufpe.cin.eercase.platform.feature_1.0.3/">
+		</feature>
+		<feature id="br.ufpe.cin.eercase.feature" version="1.0.7" url="features/br.ufpe.cin.eercase.feature_1.0.7/">
+		</feature>
+	</site>
+</config>
