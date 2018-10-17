@@ -1,8 +1,0 @@
-eclipse.preferences.version=1
-repositories/http\:__150.161.2.78\:8080_br.ufpe.cin.eercase.update/count=3
-repositories/http\:__150.161.2.78\:8080_br.ufpe.cin.eercase.update/enabled=true
-repositories/http\:__150.161.2.78\:8080_br.ufpe.cin.eercase.update/name=br.ufpe.cin.eercase.product.product_feature Repository
-repositories/http\:__150.161.2.78\:8080_br.ufpe.cin.eercase.update/suffix=content.xml
-repositories/http\:__150.161.2.78\:8080_br.ufpe.cin.eercase.update/type=org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository
-repositories/http\:__150.161.2.78\:8080_br.ufpe.cin.eercase.update/uri=http\://150.161.2.78\:8080/br.ufpe.cin.eercase.update/
-repositories/http\:__150.161.2.78\:8080_br.ufpe.cin.eercase.update/version=1.0.0
