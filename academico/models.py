@@ -156,7 +156,7 @@ class Periodo(models.Model):
         ordering=['-semestre']
 
 
-class MatriculaDisciplina(models.Model):
+class Historico(models.Model):
     matricula = models.ForeignKey(
         Matricula, on_delete=models.CASCADE, verbose_name='Matrícula')
     disciplina = models.ForeignKey(
@@ -169,6 +169,24 @@ class MatriculaDisciplina(models.Model):
         return self.matricula + ' matriculou-se em ' + self.disciplina + ' no período ' + self.periodo
 
     class Meta:
-    	verbose_name='Matrícula na disciplina'
-    	verbose_name_plural='Matrículas nas disciplinas'
+    	verbose_name='Histórico'
+    	verbose_name_plural='Históricos'
     	ordering=['periodo', 'matricula']
+
+
+class Turma(models.Model):
+    matricula = models.ForeignKey(
+        Matricula, on_delete=models.CASCADE, verbose_name='Matrícula')
+    disciplina = models.ForeignKey(
+        Disciplina, on_delete=models.CASCADE, verbose_name='Disciplina')
+    periodo = models.ForeignKey(
+        Periodo, on_delete=models.CASCADE, verbose_name='Período')
+    notaFinal = models.IntegerField('Nota Final')
+
+    def __str__(self):
+        return self.matricula + ' matriculou-se em ' + self.disciplina + ' no período ' + self.periodo
+
+    class Meta:
+        verbose_name='Turma'
+        verbose_name_plural='Turmas'
+        ordering=['disciplina', 'periodo', 'matricula']

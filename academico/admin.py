@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Aluno, TipoMatricula, Departamento, Professor, Curso, Matricula, Disciplina
-from .models import PreRequisito, DisciplinaCurso, Periodo, MatriculaDisciplina
+from .models import PreRequisito, DisciplinaCurso, Periodo, Historico, Turma
 # Register your models here.
 
 
@@ -79,9 +79,16 @@ class PeriodoAdmin(admin.ModelAdmin):
 
 admin.site.register(Periodo, PeriodoAdmin)
 
-class MatriculaDisciplinaAdmin(admin.ModelAdmin):
+class HistoricoAdmin(admin.ModelAdmin):
 	list_display = ['matricula', 'disciplina', 'periodo', 'notaFinal']
 	search_display = ['disciplina','periodo']
 	list_filter = ['disciplina','periodo']
 
-admin.site.register(MatriculaDisciplina, MatriculaDisciplinaAdmin)
+admin.site.register(Historico, HistoricoAdmin)
+
+class TurmaAdmin(admin.ModelAdmin):
+	list_display = ['matricula', 'disciplina', 'periodo', 'notaFinal']
+	search_display = ['disciplina','periodo']
+	list_filter = ['disciplina','periodo']
+
+admin.site.register(Turma, TurmaAdmin)
