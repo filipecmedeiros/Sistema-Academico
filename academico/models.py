@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Aluno(models.Model):
     cpf = models.CharField('CPF', primary_key=True, max_length=11)
     nome = models.CharField('Nome', max_length=255)
@@ -51,6 +53,8 @@ class Professor (models.Model):
     cep = models.CharField('CEP', max_length=10, null=True, blank=True)
     complemento = models.CharField(
         'Complemento', max_length=500, null=True, blank=True)
+    departamento = models.ForeignKey(
+        Departamento, on_delete=models.CASCADE, verbose_name='Departamento')
 
     def __str__(self):
         return self.nome
@@ -103,6 +107,8 @@ class Disciplina(models.Model):
     creditos = models.IntegerField('Créditos')
     departamento = models.ForeignKey(
         Departamento, on_delete=models.CASCADE, verbose_name='Departamento')
+    professor = models.ForeignKey(
+        Professor, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Professor')
 
     def __str__(self):
         return self.nome
@@ -117,10 +123,10 @@ class PreRequisito (models.Model):
     disciplina = models.ForeignKey(
         Disciplina, on_delete=models.CASCADE, verbose_name='Disciplina')
     preRequisito = models.ForeignKey(
-        Disciplina, related_name='PreRequisito' ,on_delete=models.CASCADE, verbose_name='Pré-Requisito')
+        Disciplina, related_name='PreRequisito', on_delete=models.CASCADE, verbose_name='Pré-Requisito')
 
     def __str__(self):
-        return self.disciplina + '-' + self.preRequisito
+        return str(str(self.disciplina) + '-' + str(self.preRequisito))
 
         class Meta:
             verbose_name = 'Pré-Requisito'
@@ -136,7 +142,7 @@ class DisciplinaCurso(models.Model):
     obrigatoria = models.BooleanField('Obrigatória')
 
     def __str__(self):
-        return self.disciplina + ' do curso de ' + self.curso
+        return str(str(self.disciplina) + ' do curso de ' + str(self.curso))
 
     class Meta:
         verbose_name = 'Disciplina do Curso'
@@ -153,7 +159,7 @@ class Periodo(models.Model):
     class Meta:
         verbose_name = 'Período'
         verbose_name_plural = 'Períodos'
-        ordering=['-semestre']
+        ordering = ['-semestre']
 
 
 class Historico(models.Model):
@@ -169,9 +175,9 @@ class Historico(models.Model):
         return self.matricula + ' matriculou-se em ' + self.disciplina + ' no período ' + self.periodo
 
     class Meta:
-    	verbose_name='Histórico'
-    	verbose_name_plural='Históricos'
-    	ordering=['periodo', 'matricula']
+        verbose_name = 'Histórico'
+        verbose_name_plural = 'Históricos'
+        ordering = ['periodo', 'matricula']
 
 
 class Turma(models.Model):
@@ -187,6 +193,6 @@ class Turma(models.Model):
         return self.matricula + ' matriculou-se em ' + self.disciplina + ' no período ' + self.periodo
 
     class Meta:
-        verbose_name='Turma'
-        verbose_name_plural='Turmas'
-        ordering=['disciplina', 'periodo', 'matricula']
+        verbose_name = 'Turma'
+        verbose_name_plural = 'Turmas'
+        ordering = ['disciplina', 'periodo', 'matricula']
