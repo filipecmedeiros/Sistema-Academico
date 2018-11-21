@@ -152,6 +152,8 @@ class DisciplinaCurso(models.Model):
 
 class Periodo(models.Model):
     semestre = models.CharField('Semestre', primary_key=True, max_length=6)
+    inicioMatricula = models.DateField('Inicio da data de matrícula')
+    finalMatricula = models.DateField('Data final de matrícula')
 
     def __str__(self):
         return self.semestre
@@ -162,6 +164,18 @@ class Periodo(models.Model):
         ordering = ['-semestre']
 
 
+class Situacao(models.Model):
+    situacao = models.CharField('Situação', max_length=255)
+
+    def __str__(self):
+        return self.situacao
+
+    class Meta:
+        verbose_name = 'Situação'
+        verbose_name_plural = 'Situações'
+        ordering = ['situacao']
+
+
 class Historico(models.Model):
     matricula = models.ForeignKey(
         Matricula, on_delete=models.CASCADE, verbose_name='Matrícula')
@@ -169,7 +183,9 @@ class Historico(models.Model):
         Disciplina, on_delete=models.CASCADE, verbose_name='Disciplina')
     periodo = models.ForeignKey(
         Periodo, on_delete=models.CASCADE, verbose_name='Período')
-    notaFinal = models.IntegerField('Nota Final')
+    notaFinal = models.DecimalField(
+        'Nota Final', max_digits=4, decimal_places=2, null=True, blank=True)
+    situacao = models.ForeignKey(Situacao, on_delete=models.CASCADE, verbose_name='Situação')
 
     def __str__(self):
         return self.matricula + ' matriculou-se em ' + self.disciplina + ' no período ' + self.periodo
@@ -187,10 +203,11 @@ class Turma(models.Model):
         Disciplina, on_delete=models.CASCADE, verbose_name='Disciplina')
     periodo = models.ForeignKey(
         Periodo, on_delete=models.CASCADE, verbose_name='Período')
-    notaFinal = models.IntegerField('Nota Final')
+    notaFinal = models.DecimalField(
+        'Nota Final', max_digits=4, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return self.matricula + ' matriculou-se em ' + self.disciplina + ' no período ' + self.periodo
+        return str(self.matricula) + ' matriculou-se em ' + str(self.disciplina) + ' no período ' + str(self.periodo)
 
     class Meta:
         verbose_name = 'Turma'

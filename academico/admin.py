@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import Aluno, TipoMatricula, Departamento, Professor, Curso, Matricula, Disciplina
-from .models import PreRequisito, DisciplinaCurso, Periodo, Historico, Turma
+from .models import PreRequisito, DisciplinaCurso, Periodo, Situacao, Historico, Turma
 # Register your models here.
 
 
@@ -10,6 +10,7 @@ class AlunoAdmin (admin.ModelAdmin):
                     'sexo', 'cep', 'complemento']
     search_display = ['sexo', 'created', 'modified']
     list_filter = ['sexo']
+    search_fields = ['nome']
 
 admin.site.register(Aluno, AlunoAdmin)
 
@@ -88,6 +89,15 @@ class PeriodoAdmin(admin.ModelAdmin):
     list_filter = ['semestre']
 
 admin.site.register(Periodo, PeriodoAdmin)
+
+
+class SituacaoAdmin(admin.ModelAdmin):
+    list_display = ['situacao']
+    search_display = ['situacao']
+    list_filter = ['situacao']
+    search_fields = ['situacao']
+
+admin.site.register(Situacao, SituacaoAdmin)
 
 
 class HistoricoAdmin(admin.ModelAdmin):
