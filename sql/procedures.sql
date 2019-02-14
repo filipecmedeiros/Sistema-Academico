@@ -4,16 +4,15 @@ CREATE OR REPLACE FUNCTION TurmaPeriodo (disciplina VARCHAR(255), periodo VARCHA
 	BEGIN
 			RETURN QUERY
 			SELECT M.matricula, A.nome
-			FROM academico_matricula M, academico_turma T,
-				 academico_disciplina D, academico_aluno A, academico_periodo P
+			FROM academico_disciplina D INNER JOIN academico_turma T ON D.id = T.disciplina_id
+				INNER JOIN academico_matricula M ON M.matricula = T.matricula_id
+				INNER JOIN academico_aluno A ON A.cpf = M.matricula
+				INNER JOIN academico_periodo P ON P.semestre = T.periodo_id
 			WHERE D.nome = disciplina AND
-				T.disciplina_id = D.id AND
-				P.semestre = periodo AND
-				M.matricula = T.matricula_id AND
-				A.cpf = M.matricula;
+				P.semestre = periodo;
 	END;
 $$  LANGUAGE plpgsql;
-													  
+										  
 SELECT * FROM TurmaPeriodo ('ALGEBRA LINEAR I', '2018.2');
 
 CREATE OR REPLACE FUNCTION MatriculaDisciplinas (matricula VARCHAR, disciplina_id INT[], periodo VARCHAR(6))

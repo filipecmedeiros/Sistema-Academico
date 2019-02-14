@@ -104,6 +104,7 @@ class HistoricoAdmin(admin.ModelAdmin):
     list_display = ['matricula', 'disciplina', 'periodo', 'notaFinal']
     search_display = ['disciplina', 'periodo']
     list_filter = ['disciplina', 'periodo']
+    search_fields = ['matricula__matricula', 'disciplina__nome', 'periodo__semestre']
 
 admin.site.register(Historico, HistoricoAdmin)
 
@@ -112,5 +113,6 @@ class TurmaAdmin(admin.ModelAdmin):
     list_display = ['matricula', 'disciplina', 'periodo', 'notaFinal']
     search_display = ['disciplina', 'periodo']
     list_filter = ['disciplina', 'periodo']
+    search_fields = ['matricula__matricula', 'disciplina__nome', 'periodo__semestre']
 
 admin.site.register(Turma, TurmaAdmin)
